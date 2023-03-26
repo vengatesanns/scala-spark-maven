@@ -1,12 +1,11 @@
-package org.example
+package com.hackprotech
 
-import org.apache.log4j.lf5.LogLevel
 import org.apache.spark.sql.SparkSession
 
-object App {
+object SparkWithMySqlDB {
 
   def main(args: Array[String]): Unit = {
-    val sparkSession = SparkSession.builder().appName("test").master("local[*]").getOrCreate()
+    val sparkSession = SparkSession.builder().appName("Spark With MySQL DB").master("local[*]").getOrCreate()
     sparkSession.sparkContext.setLogLevel("ERROR")
     val url = "jdbc:mysql://localhost:3306/employee"
     val driver = "com.mysql.cj.jdbc.Driver"
@@ -24,6 +23,8 @@ object App {
       .load()
 
     df.show()
+
+    sparkSession.stop()
 
   }
 
